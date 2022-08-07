@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-"""Contains the Review model"""
+"""
+Defines review class
+"""
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """Implements the Review model"""
+    """Reviews made by users about a place"""
     place_id = ""
     user_id = ""
     text = ""

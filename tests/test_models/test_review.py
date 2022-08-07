@@ -1,30 +1,40 @@
 #!/usr/bin/python3
-"""Test suite for Review class in models.review"""
+"""
+Unittest for review.py
+"""
 import unittest
-
-from models.base_model import BaseModel
 from models.review import Review
+import datetime
 
 
 class TestReview(unittest.TestCase):
-    """Test cases for the Review class"""
+    """Tests instances and methods from Review class"""
 
-    def setUp(self):
-        self.review = Review()
-        self.attr_list = [
-            "place_id",
-            "user_id",
-            "text"
-        ]
+    r = Review()
 
-    def test_review_is_a_subclass_of_basemodel(self):
-        self.assertTrue(issubclass(type(self.review), BaseModel))
+    def test_class_exists(self):
+        """tests if class exists"""
+        res = "<class 'models.review.Review'>"
+        self.assertEqual(str(type(self.r)), res)
 
-    def test_attrs_are_class_attrs(self):
-        for attr in self.attr_list:
-            self.assertTrue(hasattr(self.review, attr))
+    def test_user_inheritance(self):
+        """test if Review is a subclass of BaseModel"""
+        self.assertIsInstance(self.r, Review)
 
-    def test_class_attrs(self):
-        for attr in self.attr_list:
-            self.assertIs(type(getattr(self.review, attr)), str)
-            self.assertFalse(bool(getattr(self.review, attr)))
+    def testHasAttributes(self):
+        """verify if attributes exist"""
+        self.assertTrue(hasattr(self.r, 'place_id'))
+        self.assertTrue(hasattr(self.r, 'user_id'))
+        self.assertTrue(hasattr(self.r, 'text'))
+        self.assertTrue(hasattr(self.r, 'id'))
+        self.assertTrue(hasattr(self.r, 'created_at'))
+        self.assertTrue(hasattr(self.r, 'updated_at'))
+
+    def test_types(self):
+        """tests if the type of the attribute is the correct one"""
+        self.assertIsInstance(self.r.place_id, str)
+        self.assertIsInstance(self.r.user_id, str)
+        self.assertIsInstance(self.r.text, str)
+        self.assertIsInstance(self.r.id, str)
+        self.assertIsInstance(self.r.created_at, datetime.datetime)
+        self.assertIsInstance(self.r.updated_at, datetime.datetime)

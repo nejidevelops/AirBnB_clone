@@ -1,27 +1,44 @@
 #!/usr/bin/python3
-"""Test suite for the User class in models.user"""
+"""
+Unittest for user.py
+"""
 import unittest
-from models.base_model import BaseModel
-
 from models.user import User
+import datetime
 
 
-class TestUser(unittest.TestCase):
-    """Test cases against the User class"""
+class UserCase(unittest.TestCase):
+    """Tests instances and methods from user class"""
 
-    def test_attrs_are_class_attrs(self):
-        u = User()
-        # test that it is a class attribute
-        self.assertTrue(hasattr(User, "first_name")
-                        and hasattr(User, "last_name"))
+    u = User()
 
-    def test_class_attrs(self):
-        u = User()
-        self.assertIs(type(u.first_name), str)
-        self.assertIs(type(u.last_name), str)
-        self.assertTrue(u.first_name == "")
-        self.assertTrue(u.last_name == "")
+    def test_class_exists(self):
+        """tests if class exists"""
+        self.assertEqual(str(type(self.u)), "<class 'models.user.User'>")
 
-    def test_user_is_a_subclass_of_basemodel(self):
-        u = User()
-        self.assertTrue(issubclass(type(u), BaseModel))
+    def test_user_inheritance(self):
+        """test if User is a subclass of BaseModel"""
+        self.assertIsInstance(self.u, User)
+
+    def testHasAttributes(self):
+        """verify if attributes exist"""
+        self.assertTrue(hasattr(self.u, 'email'))
+        self.assertTrue(hasattr(self.u, 'password'))
+        self.assertTrue(hasattr(self.u, 'first_name'))
+        self.assertTrue(hasattr(self.u, 'last_name'))
+        self.assertTrue(hasattr(self.u, 'id'))
+        self.assertTrue(hasattr(self.u, 'created_at'))
+        self.assertTrue(hasattr(self.u, 'updated_at'))
+
+    def test_types(self):
+        """tests if the type of the attribute is the correct one"""
+        self.assertIsInstance(self.u.first_name, str)
+        self.assertIsInstance(self.u.last_name, str)
+        self.assertIsInstance(self.u.email, str)
+        self.assertIsInstance(self.u.password, str)
+        self.assertIsInstance(self.u.id, str)
+        self.assertIsInstance(self.u.created_at, datetime.datetime)
+        self.assertIsInstance(self.u.updated_at, datetime.datetime)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""A module containing the State model"""
+"""
+Class that defines a state
+"""
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """Implements the State model for any state object"""
+    """class to create a state"""
     name = ""
