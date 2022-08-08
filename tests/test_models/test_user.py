@@ -67,11 +67,11 @@ class TestUser_instantiation(unittest.TestCase):
         us = User()
         us.id = "123456"
         us.created_at = us.updated_at = dt
-        usr_str = us.__str__()
-        self.assertIn("[User] (123456)", usr_str)
-        self.assertIn("'id': '123456'", usr_str)
-        self.assertIn("'created_at': " + dt_repr, usr_str)
-        self.assertIn("'updated_at': " + dt_repr, usr_str)
+        usstr = us.__str__()
+        self.assertIn("[User] (123456)", usstr)
+        self.assertIn("'id': '123456'", usstr)
+        self.assertIn("'created_at': " + dt_repr, usstr)
+        self.assertIn("'updated_at': " + dt_repr, usstr)
 
     def test_args_unused(self):
         us = User(None)
@@ -156,9 +156,9 @@ class TestUser_to_dict(unittest.TestCase):
 
     def test_to_dict_contains_added_attributes(self):
         us = User()
-        us.middle_name = "ALX"
+        us.middle_name = "Holberton"
         us.my_number = 98
-        self.assertEqual("ALX", us.middle_name)
+        self.assertEqual("Holberton", us.middle_name)
         self.assertIn("my_number", us.to_dict())
 
     def test_to_dict_datetime_attributes_are_strs(self):
@@ -168,18 +168,18 @@ class TestUser_to_dict(unittest.TestCase):
         self.assertEqual(str, type(us_dict["created_at"]))
         self.assertEqual(str, type(us_dict["updated_at"]))
 
-    # def test_to_dict_output(self):
-    #     dt = datetime.today()
-    #     us = User()
-    #     us.id = "123456"
-    #     us.created_at = us.updated_at = dt
-    #     to_dict = {
-    #         'id': '123456',
-    #         '__class__': 'User',
-    #         'created_at': dt.isoformat(),
-    #         'updated_at': dt.isoformat(),
-    #     }
-    #     self.asserto_dictEqual(us.to_dict(), to_dict)
+    def test_to_dict_output(self):
+        dt = datetime.today()
+        us = User()
+        us.id = "123456"
+        us.created_at = us.updated_at = dt
+        tdict = {
+            'id': '123456',
+            '__class__': 'User',
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat(),
+        }
+        self.assertDictEqual(us.to_dict(), tdict)
 
     def test_contrast_to_dict_dunder_dict(self):
         us = User()

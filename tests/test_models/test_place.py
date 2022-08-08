@@ -121,11 +121,11 @@ class TestPlace_instantiation(unittest.TestCase):
         pl = Place()
         pl.id = "123456"
         pl.created_at = pl.updated_at = dt
-        place_str = pl.__str__()
-        self.assertIn("[Place] (123456)", place_str)
-        self.assertIn("'id': '123456'", place_str)
-        self.assertIn("'created_at': " + dt_repr, place_str)
-        self.assertIn("'updated_at': " + dt_repr, place_str)
+        plstr = pl.__str__()
+        self.assertIn("[Place] (123456)", plstr)
+        self.assertIn("'id': '123456'", plstr)
+        self.assertIn("'created_at': " + dt_repr, plstr)
+        self.assertIn("'updated_at': " + dt_repr, plstr)
 
     def test_args_unused(self):
         pl = Place(None)
@@ -227,13 +227,13 @@ class TestPlace_to_dict(unittest.TestCase):
         pl = Place()
         pl.id = "123456"
         pl.created_at = pl.updated_at = dt
-        to_dict = {
+        tdict = {
             'id': '123456',
             '__class__': 'Place',
             'created_at': dt.isoformat(),
             'updated_at': dt.isoformat(),
         }
-        self.asserto_dictEqual(pl.to_dict(), to_dict)
+        self.assertDictEqual(pl.to_dict(), tdict)
 
     def test_contrast_to_dict_dunder_dict(self):
         pl = Place()
